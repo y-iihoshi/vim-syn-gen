@@ -3,4 +3,3 @@ vim-syn-gen.py
     A general script for creation of Vim C syntax file extensions from
     gtk-doc documentation.  Used with conjunction of one of configs/*.py
     which contains configuration for the corresponded documentation.
-    
