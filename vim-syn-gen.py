@@ -1,8 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/env python2
 # vim-syn-gen.py -- Generate vim syntax highligting from gtk-doc documentation
 # Written by Yeti <yeti@physics.muni.cz>, 2005 and later.
 # This script is in the public domain.
-import re, glob, time, sys, os, pwd
+import re, glob, time, sys, os, pwd, codecs
 
 # To find modules in directory it was symlinked to.
 sys.path.insert(0, os.path.dirname(sys.argv[0]))
@@ -144,7 +144,7 @@ def deprecated_from_devhelp2(filename):
 
     deprecated = set()
     for f in dh2files:
-        for line in file(f):
+        for line in codecs.open(f, 'r', 'utf-8'):
             m = re_deprecated.search(line)
             if not m:
                 continue
@@ -182,7 +182,7 @@ def override(decldict, overrides, create_new):
 decls = dict([(x, {}) for x in types])
 identdefs = {}
 for filename in glob.glob(options['file_glob']):
-    fh = file(filename, 'r')
+    fh = codecs.open(filename, 'r', 'utf-8')
     text = fh.read()
     fh.close()
     for d in re_decl.finditer(text):
